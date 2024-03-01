@@ -13,18 +13,18 @@ Import-Module OSD -Force -ErrorAction Stop
 Import-Module OSD -Force -ErrorAction Stop
 
 # Cloud Catalogs
-Get-DellSystemCatalog -UpdateModuleCatalog
-Get-HPPlatformCatalog -UpdateModuleCatalog
-Get-HPSystemCatalog -UpdateModuleCatalog
-Get-LenovoBiosCatalog -UpdateModuleCatalog
+#Get-DellSystemCatalog -UpdateModuleCatalog
+#Get-HPPlatformCatalog -UpdateModuleCatalog
+#Get-HPSystemCatalog -UpdateModuleCatalog
+#Get-LenovoBiosCatalog -UpdateModuleCatalog
 
 # Import OSD Module
 Import-Module OSD -Force -ErrorAction Stop
 
 # DriverPack Catalogs
-Update-DellDriverPackCatalog -UpdateModuleCatalog -Verify
-Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
-Update-HPDriverPackCatalog -UpdateModuleCatalog -Verify
+#Update-DellDriverPackCatalog -UpdateModuleCatalog -Verify
+#Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
+#Update-HPDriverPackCatalog -UpdateModuleCatalog -Verify
 Update-MicrosoftDriverPackCatalog -UpdateModuleCatalog -Verify
 
 # PlatyPS Module
@@ -49,9 +49,9 @@ New-ExternalHelp -Path $OSDDocsPath -OutputPath $OSDDocsOutoutPath -Force
 
 # Master DriverPacks
 $MasterDriverPacks = @()
-$MasterDriverPacks += Get-DellDriverPack
-$MasterDriverPacks += Get-HPDriverPack
-$MasterDriverPacks += Get-LenovoDriverPack
+#$MasterDriverPacks += Get-DellDriverPack
+#$MasterDriverPacks += Get-HPDriverPack
+#$MasterDriverPacks += Get-LenovoDriverPack
 $MasterDriverPacks += Get-MicrosoftDriverPack
 
 $Results = $MasterDriverPacks | `
