@@ -46,7 +46,7 @@ function Update-MicrosoftDriverPackCatalog {
     $OnlineDownloadUri = 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
     $OnlineCatalogUri = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
 
-    $MicrosoftSurfaceModels = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftSurfaceModels.json" -Raw
+    $MicrosoftSurfaceModels = Get-Content -Path "$(Get-Location)\Catalogs\MicrosoftSurfaceModels.json" -Raw
     #=================================================
     #   Additional Paths
     #=================================================
@@ -58,8 +58,8 @@ function Update-MicrosoftDriverPackCatalog {
     $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
     $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogXml       = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.xml"
-    $ModuleCatalogJson      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.json"
+    $ModuleCatalogXml       = "$(Get-Location)\Catalogs\MicrosoftDriverPackCatalog.xml"
+    $ModuleCatalogJson      = "$(Get-Location)\Catalogs\MicrosoftDriverPackCatalog.json"
     #=================================================
     #   UseCatalog Cloud
     #=================================================
@@ -202,6 +202,10 @@ function Update-MicrosoftDriverPackCatalog {
             $Item.OSReleaseId = '22H2'
             $Item.Name = $Item.Name -replace 'Win11 22621', 'Win11 22H2'
         }
+        if ($Item.Name -match 'Win11 22631') {
+            $Item.OSReleaseId = '23H2'
+            $Item.Name = $Item.Name -replace 'Win11 22621', 'Win11 23H2'
+        }
     }
     #=================================================
     #   UpdateModule
@@ -242,3 +246,5 @@ function Update-MicrosoftDriverPackCatalog {
     $Global:MicrosoftDriverPackCatalog = $MasterResults | Sort-Object -Property Name
     #=================================================
 }
+
+Update-MicrosoftDriverPackCatalog -UpdateModuleCatalog -Verify
